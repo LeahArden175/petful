@@ -92,15 +92,9 @@ export default class AdoptPage extends Component {
           this.setState({people})
         })  
       )
-
         this.setState({
           adopting : !this.state.adopting
         })
-        // console.log(this.state.people[0], )
-        // if(this.state.people[0] === this.state.user) {
-        //   console.log('stop counter')
-        //   clearInterval(interval)
-        // }
     }, 5000)
 
     event.target.name.value = ''
@@ -123,7 +117,6 @@ export default class AdoptPage extends Component {
         body: JSON.stringify(names[count--]),
       }).then((response) => {
         if(count === -1) return
-        console.log('names', names[count].name)
         this.updatePeople(names[count].name)
       });
     }, 5000);
@@ -134,6 +127,8 @@ export default class AdoptPage extends Component {
       updatePets: this.updatePets,
       updatePeople: this.updatePeople,
       setPeople: this.setPeople,
+      user : this.state.user,
+      people : this.state.people
     };
     const { people, pets } = this.state;
 

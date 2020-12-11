@@ -10,15 +10,26 @@ export default class CatCard extends Component {
     console.log("clicked");
     const type = { type: event.target.id };
     ApiCalls.removePet(type)
-      .then(()=> ApiCalls.getPets())
+      .then(() => ApiCalls.getPets())
       .then((pets) => {
-          this.context.updatePets(pets)
+        this.context.updatePets(pets);
       })
+      .then(() => ApiCalls.removePerson())
       .then(() => ApiCalls.getAllPeople())
       .then((people) => {
-        this.context.setPeople(people)
-  })
-}
+        this.context.setPeople(people);
+      });
+  };
+
+  showAdoptButton = () => {
+    if (this.context.user && this.context.user === this.context.people[0]) {
+      return (
+        <button id="cats" onClick={this.handleAdopt}>
+          Adopt me!
+        </button>
+      );
+    }
+  };
 
   render() {
     if (!this.props.cats) {
@@ -35,10 +46,8 @@ export default class CatCard extends Component {
           <p>{cat.breed}</p>
           <p>{cat.age}</p>
           <p>{cat.description}</p>
+          {this.showAdoptButton()}
         </div>
-        <button id="cats" onClick={this.handleAdopt}>
-          Adopt me!
-        </button>
       </div>
     );
   }

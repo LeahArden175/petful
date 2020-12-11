@@ -20,6 +20,16 @@ export default class DogCard extends Component {
     })
   };
 
+  showAdoptButton = () => {
+    if (this.context.user && this.context.user === this.context.people[0]) {
+      return (
+        <button id="cats" onClick={this.handleAdopt}>
+          Adopt me!
+        </button>
+      );
+    }
+  };
+
   render() {
     // console.log(this.props);
     // console.log(this.context);
@@ -39,9 +49,7 @@ export default class DogCard extends Component {
           <p>{dog.age}</p>
           <p>{dog.description}</p>
         </div>
-        <button id="dogs" onClick={this.handleAdopt}>
-          Adopt me!
-        </button>
+        {this.showAdoptButton()}
       </div>
     );
   }
