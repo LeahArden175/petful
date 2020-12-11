@@ -41,27 +41,39 @@ export default class AdoptPage extends Component {
     });
   };
 
-  updatePeople = (people) => {
+  updatePeople = (person) => {
+    console.log(person)
     this.setState({
-      people,
+      people: [...this.state.people, person]
     });
   };
+
+  setPeople = (people) => {
+    this.setState({
+      people
+    })
+  }
 
   joinList = (event) => {
     event.preventDefault();
     let people = this.state.people;
-    people.push(event.target.name.value);
+    // people.push(event.target.name.value);
 
     console.log("people", people);
 
     ApiCalls.addPerson({ name: event.target.name.value });
 
     this.setState({
-      people: people,
+      people: [...people, event.target.name.value],
       user: event.target.name.value,
     });
 
     let interval = setInterval(() => {
+      if(this.state.people[0] === this.state.user) {
+        console.log('stop counter')
+        this.fillPeopleQueue();
+        return clearInterval(interval)
+      }
       let pet
       if(this.state.adopting === true) {
         pet = {type : 'cats'}
@@ -69,6 +81,7 @@ export default class AdoptPage extends Component {
         pet = {type : 'dogs'}
       }
       ApiCalls.removePet(pet)
+      .then(ApiCalls.removePerson(this.state.people[0]))
       .then(ApiCalls.getPets()
         .then((pets) => {
           this.updatePets(pets)
@@ -76,39 +89,43 @@ export default class AdoptPage extends Component {
       )
       .then(ApiCalls.getAllPeople()
         .then((people) => {
-          this.updatePeople(people)
+          this.setState({people})
         })  
       )
 
         this.setState({
-          animal : !this.state.animal
+          adopting : !this.state.adopting
         })
-
-        if(this.state.people[1] === this.state.currentUser) {
-          clearInterval(interval)
-        }
+        // console.log(this.state.people[0], )
+        // if(this.state.people[0] === this.state.user) {
+        //   console.log('stop counter')
+        //   clearInterval(interval)
+        // }
     }, 5000)
 
     event.target.name.value = ''
   };
 
   fillPeopleQueue() {
-    let names = [{ Name: 'Malcolm Reynolds' }, { Name: 'River Tam' }, { Name: 'Kaylee Frye' }, { Name: 'Hoban Washburne' }]
-    let count = 3;
-    this.state.people.push(names[count].Name);
-    let intervalID = setInterval(function () {
+    let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }]
+    console.log(names)
+    let count = 4;
+    // this.state.people.push(names[count].name);
+    this.intervalID = setInterval(() => {
+      if (count === -1) {
+        return clearInterval(this.intervalID)
+      }
       fetch(`${config.API_ENDPOINT}/people`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
         },
         body: JSON.stringify(names[count--]),
-      }).then(() => {
-        this.updatePeople()
+      }).then((response) => {
+        if(count === -1) return
+        console.log('names', names[count].name)
+        this.updatePeople(names[count].name)
       });
-      if (count === -1) {
-        clearInterval(intervalID)
-      }
     }, 5000);
   };
 
@@ -116,12 +133,9 @@ export default class AdoptPage extends Component {
     const value = {
       updatePets: this.updatePets,
       updatePeople: this.updatePeople,
+      setPeople: this.setPeople,
     };
-    const { people, pets, user, other } = this.state;
-
-    if(people[0] === this.state.currentUser && people.length === 1){
-      this.fillTheQueue();
-    }
+    const { people, pets } = this.state;
 
     return (
       <Context.Provider value={value}>

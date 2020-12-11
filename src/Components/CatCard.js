@@ -10,13 +10,15 @@ export default class CatCard extends Component {
     console.log("clicked");
     const type = { type: event.target.id };
     console.log(type);
-    ApiCalls.removePet(type);
-    ApiCalls.getPets().then((pets) => {
-      this.context.updatePets(pets);
-    })
-    ApiCalls.getAllPeople().then((people) => {
-      this.context.updatePeople(people)
-  });
+    ApiCalls.removePet(type)
+      .then(()=> ApiCalls.getPets())
+      .then((pets) => {
+          this.context.updatePets(pets)
+      })
+      .then(() => ApiCalls.getAllPeople())
+      .then((people) => {
+        this.context.setPeople(people)
+  })
 }
 
   render() {

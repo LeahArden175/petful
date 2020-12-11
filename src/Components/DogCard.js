@@ -9,7 +9,7 @@ export default class DogCard extends Component {
     event.preventDefault();
     console.log("clicked");
     const type = { type: event.target.id };
-    console.log(type);
+    // console.log(type);
     ApiCalls.removePet(type);
     ApiCalls.getPets().then((pets) => {
       this.context.updatePets(pets);
@@ -17,8 +17,8 @@ export default class DogCard extends Component {
   };
 
   render() {
-    console.log(this.props);
-    console.log(this.context);
+    // console.log(this.props);
+    // console.log(this.context);
     if (!this.props.dogs) {
       return "Loading";
     }
