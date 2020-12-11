@@ -1,28 +1,53 @@
 import React, { Component } from "react";
-import PetCard from "../Components/PetCard";
-import PeopleQueue from "../Components/PeopleQueue";
+import ApiCalls from "../ApiCalls";
 
-export default function AdoptPage(props) {
+export default class AdoptPage extends Component {
 
+    state= {
+        pets: {
+            cat : null,
+            dog: null,
+        },
+        other : [],
+        people : [],
+        user: sessionStorage.getItem("petful-user-name") || null,
+        error: null
+    }
+
+    randomUsers = [
+        "Leah A",
+        "Nick D",
+        "Alenni D",
+        "Michael D",
+        "Joy A"
+    ];
+
+    componentDidMount() {
+        this.getData();
+    }
+
+    getData() {
+        ApiCalls.getPets()
+            .then((pets) => {
+                ApiCalls.getAllPeople().then((people) => {
+                    this.setState({
+                        pets: pets,
+                        people: people,
+                        other: [...pets.cat.slice(1,3), ...pets.dog.slice(1,3)]
+                    })
+                    console.log(this.state)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+            })
+    }
+
+    render() {
     return (
-      <div>
-        <p>Adopt a pet!</p>
         <div>
-            <p>Currently up for Adoption:</p>
-            <div>
-                <PetCard />
-            </div>
-            <div>
-                <p>Rules</p>
-                <p>You must join the queue to get the chance to adopt a pet</p>
-                <p>We only allow one cat and one dog to be adopted at a time</p>
-                <p>The person at the top of the queue has 5 seconds to choose which pet they would like to adopt</p>
-            </div>
-            <div>
-                <p>Join the queue*** FORM HERE</p>
-                <PeopleQueue queue={props.queue} adopt={props.adopt} />
-            </div>
+            <p>AdoptPage</p>
         </div>
-      </div>
     );
+  }
 }
