@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ApiCalls from "../ApiCalls";
+import PetInfo from '../Components/PetInfo'
 
 export default class AdoptPage extends Component {
 
@@ -41,12 +42,13 @@ export default class AdoptPage extends Component {
                     console.error(error)
                 })
             })
-    }
+    }    
 
     render() {
+        const {people, pets, user, other} = this.state
     return (
         <div>
-            <p>AdoptPage</p>
+          <PetInfo pets={pets}/>  
         </div>
     );
   }
