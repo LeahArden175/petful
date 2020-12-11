@@ -9,17 +9,11 @@ export default class PetInfo extends Component {
         //Do a map here? Or in the component?
         const cats = this.props.pets.cat
         const dogs = this.props.pets.dog
+        const people = this.props.people
     return (
         <div>
-            <CatCard cats={cats}/>
+            <CatCard cats={cats} people={people}/>
             <DogCard dogs={dogs}/>
-            {/* {cats.map((cat) => {
-                return (
-                    <div>
-                        <p>{cat.name}</p>
-                    </div>
-                )
-            })} */}
         </div>
     );
   }

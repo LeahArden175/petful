@@ -13,14 +13,16 @@ export default class CatCard extends Component {
     ApiCalls.removePet(type);
     ApiCalls.getPets().then((pets) => {
       this.context.updatePets(pets);
-    });
-  };
+    })
+    ApiCalls.getAllPeople().then((people) => {
+      this.context.updatePeople(people)
+  });
+}
 
   render() {
     if (!this.props.cats) {
       return "Loading";
     }
-
     const cat = this.props.cats[0];
 
     return (

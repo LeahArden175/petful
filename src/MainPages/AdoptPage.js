@@ -13,6 +13,7 @@ export default class AdoptPage extends Component {
             dog: null,
         },
         people : [],
+        user : null,
     }
 
     componentDidMount() {
@@ -41,16 +42,51 @@ export default class AdoptPage extends Component {
         })
     }
 
+    updatePeople = (people) => {
+      this.setState({
+        people
+      })
+    }
+
+    joinList = (event) => {
+      event.preventDefault()
+      let people = this.state.people
+      people.push(event.target.name.value)
+
+      console.log('people', people)
+
+      ApiCalls.addPerson({name: event.target.name.value})
+
+      this.setState({
+        people : people,
+        user : event.target.name.value
+      })
+    }
 
     render() {
         const value = {
             updatePets: this.updatePets,
+            updatePeople: this.updatePeople,
         }
         const {people, pets, user, other} = this.state
     return (
         <Context.Provider value={value}>
         <div>
-          <PetInfo pets={pets}/>  
+          <PetInfo pets={pets} people={people}/>  
+        </div>
+        <div>
+          <p>Join the back of the line to adopt!</p>
+          <ul>
+            {people.map((person, index) => {
+              return (
+                <li key={index}>{person}</li>
+              )
+            })}
+          </ul>
+          <form onSubmit={this.joinList}>
+            <input id='name' placeholder="Jane Doe" required type='text'></input>
+            <button>Join Line!</button>
+          </form>
         </div>
         </Context.Provider>
     );
