@@ -9,7 +9,6 @@ export default class AdoptPage extends Component {
             cat : null,
             dog: null,
         },
-        other : [],
         people : [],
         user: sessionStorage.getItem("petful-user-name") || null,
         error: null
@@ -34,7 +33,6 @@ export default class AdoptPage extends Component {
                     this.setState({
                         pets: pets,
                         people: people,
-                        other: [...pets.cat.slice(1,3), ...pets.dog.slice(1,3)]
                     })
                     console.log(this.state)
                 })
