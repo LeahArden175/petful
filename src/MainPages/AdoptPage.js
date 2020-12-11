@@ -107,7 +107,7 @@ export default class AdoptPage extends Component {
   };
 
   fillPeopleQueue() {
-    let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }]
+    let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }, { name: 'E' }]
     console.log(names)
     let count = 4;
     // this.state.people.push(names[count].name);

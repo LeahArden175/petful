@@ -9,7 +9,6 @@ export default class CatCard extends Component {
     event.preventDefault();
     console.log("clicked");
     const type = { type: event.target.id };
-    console.log(type);
     ApiCalls.removePet(type)
       .then(()=> ApiCalls.getPets())
       .then((pets) => {
