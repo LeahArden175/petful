@@ -1,26 +1,19 @@
 import React, { Component } from "react";
 import ApiCalls from "../ApiCalls";
+import config from '../config'
 import PetInfo from '../Components/PetInfo'
+import Context from '../Context'
 
 export default class AdoptPage extends Component {
 
     state= {
+        type : null,
         pets: {
             cat : null,
             dog: null,
         },
         people : [],
-        user: sessionStorage.getItem("petful-user-name") || null,
-        error: null
     }
-
-    randomUsers = [
-        "Leah A",
-        "Nick D",
-        "Alenni D",
-        "Michael D",
-        "Joy A"
-    ];
 
     componentDidMount() {
         this.getData();
@@ -40,14 +33,26 @@ export default class AdoptPage extends Component {
                     console.error(error)
                 })
             })
-    }    
+    }
+    
+    updatePets =(pets) => {
+        this.setState({
+          pets: pets
+        })
+    }
+
 
     render() {
+        const value = {
+            updatePets: this.updatePets,
+        }
         const {people, pets, user, other} = this.state
     return (
+        <Context.Provider value={value}>
         <div>
           <PetInfo pets={pets}/>  
         </div>
+        </Context.Provider>
     );
   }
 }

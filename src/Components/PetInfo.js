@@ -13,6 +13,13 @@ export default class PetInfo extends Component {
         <div>
             <CatCard cats={cats}/>
             <DogCard dogs={dogs}/>
+            {/* {cats.map((cat) => {
+                return (
+                    <div>
+                        <p>{cat.name}</p>
+                    </div>
+                )
+            })} */}
         </div>
     );
   }

@@ -1,13 +1,44 @@
 import React, { Component } from "react";
+import ApiCalls from "../ApiCalls";
+import Context from "../Context";
 
 export default class DogCard extends Component {
-    render() {
-        
+  static contextType = Context;
+
+  handleAdopt = (event) => {
+    event.preventDefault();
+    console.log("clicked");
+    const type = { type: event.target.id };
+    console.log(type);
+    ApiCalls.removePet(type);
+    ApiCalls.getPets().then((pets) => {
+      this.context.updatePets(pets);
+    });
+  };
+
+  render() {
+    console.log(this.props);
+    console.log(this.context);
+    if (!this.props.dogs) {
+      return "Loading";
+    }
+
+    const dog = this.props.dogs[0];
+
     return (
+      <div>
         <div>
-            <p>DogCard</p>
-            {console.log(this.props)}
+          <h2>DogCard</h2>
+          <img src={dog.imageURL} alt="dog" />
+          <p>{dog.name}</p>
+          <p>{dog.breed}</p>
+          <p>{dog.age}</p>
+          <p>{dog.description}</p>
         </div>
+        <button id="dogs" onClick={this.handleAdopt}>
+          Adopt me!
+        </button>
+      </div>
     );
   }
 }

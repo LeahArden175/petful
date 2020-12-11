@@ -28,11 +28,12 @@ getPets() {
   },
 
   removePet(pet) {
-    return fetch(`${config.API_ENDPOINT}/pets/${pet}`, {
+    return fetch(`${config.API_ENDPOINT}/pets`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
       },
+      body: JSON.stringify(pet)
     })
   },
 };
