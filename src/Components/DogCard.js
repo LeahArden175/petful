@@ -14,6 +14,7 @@ export default class DogCard extends Component {
     .then((pets) => {
       this.context.updatePets(pets)
     })
+    .then(() => ApiCalls.removePerson(this.context.user))
     .then(() => ApiCalls.getAllPeople())
     .then((people) => {
       this.context.setPeople(people)
@@ -21,7 +22,7 @@ export default class DogCard extends Component {
   };
 
   showAdoptButton = () => {
-    if (this.context.user && this.context.user === this.context.people[0]) {
+    if (this.context.user && this.context.people && this.context.user === this.context.people[0]) {
       return (
         <button id="cats" onClick={this.handleAdopt}>
           Adopt me!

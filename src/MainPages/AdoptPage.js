@@ -68,11 +68,11 @@ export default class AdoptPage extends Component {
       user: event.target.name.value,
     });
 
-    let interval = setInterval(() => {
+    this.interval = setInterval(() => {
       if(this.state.people[0] === this.state.user) {
         console.log('stop counter')
         this.fillPeopleQueue();
-        return clearInterval(interval)
+        return clearInterval(this.interval)
       }
       let pet
       if(this.state.adopting === true) {
@@ -84,6 +84,9 @@ export default class AdoptPage extends Component {
       .then(ApiCalls.removePerson(this.state.people[0]))
       .then(ApiCalls.getPets()
         .then((pets) => {
+          this.setState({
+            adopting : !this.state.adopting
+          })
           this.updatePets(pets)
         })
       )
@@ -92,9 +95,6 @@ export default class AdoptPage extends Component {
           this.setState({people})
         })  
       )
-        this.setState({
-          adopting : !this.state.adopting
-        })
     }, 5000)
 
     event.target.name.value = ''
@@ -122,6 +122,20 @@ export default class AdoptPage extends Component {
     }, 5000);
   };
 
+  renderPeopleQueue = () => {
+    if(this.state.people){
+      return this.state.people.map((person, index) => {
+        return (
+        <li key={index}>{person}</li>
+        )
+      })
+    } else {
+      return (
+      <p>No one in line</p>
+      )
+    }
+  }
+
   render() {
     const value = {
       updatePets: this.updatePets,
@@ -140,9 +154,10 @@ export default class AdoptPage extends Component {
         <div>
           <p>Join the back of the line to adopt!</p>
           <ul>
-            {people.map((person, index) => {
+            {/* {people.map((person, index) => {
               return <li key={index}>{person}</li>;
-            })}
+            })} */}
+            {this.renderPeopleQueue()}
           </ul>
           <form onSubmit={this.joinList}>
             <input
