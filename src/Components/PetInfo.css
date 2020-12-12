@@ -1,0 +1,19 @@
+.pet-card-div {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+@media all and (min-width: 800px){
+    .pet-card-div {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-items: center;
+        text-align: center;
+        margin: auto;
+      }
+}

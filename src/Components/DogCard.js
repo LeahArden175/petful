@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiCalls from "../ApiCalls";
 import Context from "../Context";
+import './DogCard.css'
 
 export default class DogCard extends Component {
   static contextType = Context;
@@ -19,6 +20,9 @@ export default class DogCard extends Component {
     .then((people) => {
       this.context.setPeople(people)
     })
+    window.alert (
+      "Congrats!! You adopted a dog!"
+    )
   };
 
   showAdoptButton = () => {
@@ -32,8 +36,6 @@ export default class DogCard extends Component {
   };
 
   render() {
-    // console.log(this.props);
-    // console.log(this.context);
     if (!this.props.dogs) {
       return "Loading";
     }
@@ -42,13 +44,13 @@ export default class DogCard extends Component {
 
     return (
       <div>
-        <div>
+        <div className='pet-card'>
           <h2>DogCard</h2>
-          <img src={dog.imageURL} alt="dog" />
-          <p>{dog.name}</p>
-          <p>{dog.breed}</p>
-          <p>{dog.age}</p>
-          <p>{dog.description}</p>
+          <img className='pet-img'src={dog.imageURL} alt="dog" />
+          <p>Name: {dog.name}</p>
+          <p>Breed: {dog.breed}</p>
+          <p>Age: {dog.age}</p>
+          <p>Story: {dog.story}</p>
         </div>
         {this.showAdoptButton()}
       </div>

@@ -57,6 +57,9 @@ export default class AdoptPage extends Component {
   joinList = (event) => {
     event.preventDefault();
     let people = this.state.people;
+    // if(this.state.people === null){
+    //   this.fillPeopleQueue()
+    // }
 
     console.log("people", people);
 
@@ -68,10 +71,11 @@ export default class AdoptPage extends Component {
     });
 
     this.interval = setInterval(() => {
-      console.log('COUNTER')
+      if(this.state.people[1] === this.state.user) {
+        this.fillPeopleQueue();
+      }
       if(this.state.people[0] === this.state.user) {
         console.log('stop counter')
-        this.fillPeopleQueue();
         return clearInterval(this.interval)
       }
       let pet
@@ -101,15 +105,14 @@ export default class AdoptPage extends Component {
   };
 
   fillPeopleQueue() {
-    let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }, { name: 'E' }]
+    let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }]
     console.log(names)
     let count = 4;
-    // this.state.people.push(names[count].name);
     this.intervalID = setInterval(() => {
       if (count === -1) {
         return clearInterval(this.intervalID)
       }
-      fetch(`${config.API_ENDPOINT}/people`, {
+      fetch(`${config.REACT_APP_API_BASE}/people`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -154,9 +157,7 @@ export default class AdoptPage extends Component {
         <div>
           <p>Join the back of the line to adopt!</p>
           <ul>
-            {/* {people.map((person, index) => {
-              return <li key={index}>{person}</li>;
-            })} */}
+
             {this.renderPeopleQueue()}
           </ul>
           <form onSubmit={this.joinList}>

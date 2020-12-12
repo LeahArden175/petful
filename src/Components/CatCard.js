@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiCalls from "../ApiCalls";
 import Context from "../Context";
+import './CatCard.css'
 
 export default class CatCard extends Component {
   static contextType = Context;
@@ -18,7 +19,10 @@ export default class CatCard extends Component {
       .then(() => ApiCalls.getAllPeople())
       .then((people) => {
         this.context.setPeople(people);
-      });
+      })
+      return (
+        <p>Congrats!! You adopted a dog!</p>
+      )
   };
 
   showAdoptButton = () => {
@@ -39,15 +43,15 @@ export default class CatCard extends Component {
 
     return (
       <div>
-        <div>
+        <div className='pet-card'>
           <h2>CatCard</h2>
-          <img src={cat.imageURL} alt="cat" />
+          <img className='pet-img' src={cat.imageURL} alt="cat" />
           <p>{cat.name}</p>
           <p>{cat.breed}</p>
           <p>{cat.age}</p>
           <p>{cat.description}</p>
+          </div>
           {this.showAdoptButton()}
-        </div>
       </div>
     );
   }

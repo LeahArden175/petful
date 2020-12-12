@@ -1,0 +1,15 @@
+.pet-card{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.pet-img{
+    width : 90%;
+    margin: auto;
+}
+
+p{
+    margin: 10px;
+}

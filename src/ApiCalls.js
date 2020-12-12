@@ -1,15 +1,15 @@
 import config from './config'
 const ApiCalls = {
 getPets() {
-    return fetch(`${config.API_ENDPOINT}/pets`).then((res) => res.json())
+    return fetch(`${config.REACT_APP_API_BASE}/pets`).then((res) => res.json())
   },
 
   getAllPeople() {
-    return fetch(`${config.API_ENDPOINT}/people`).then((res) => res.json());
+    return fetch(`${config.REACT_APP_API_BASE}/people`).then((res) => res.json());
   },
 
   addPerson(person) {
-    return fetch(`${config.API_ENDPOINT}/people`, {
+    return fetch(`${config.REACT_APP_API_BASE}/people`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -19,7 +19,7 @@ getPets() {
   },
 
   removePerson() {
-    return fetch(`${config.API_ENDPOINT}/people`, {
+    return fetch(`${config.REACT_APP_API_BASE}/people`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -28,7 +28,7 @@ getPets() {
   },
 
   removePet(pet) {
-    return fetch(`${config.API_ENDPOINT}/pets`, {
+    return fetch(`${config.REACT_APP_API_BASE}/pets`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',

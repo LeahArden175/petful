@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CatCard from './CatCard'
-import DogCard from "./DogCard";
+import DogCard from "./DogCard"
+import './PetInfo.css'
 
 export default class PetInfo extends Component {
 
@@ -11,7 +12,7 @@ export default class PetInfo extends Component {
         const dogs = this.props.pets.dog
         const people = this.props.people
     return (
-        <div>
+        <div className='pet-card-div'>
             <CatCard cats={cats} people={people}/>
             <DogCard dogs={dogs}/>
         </div>

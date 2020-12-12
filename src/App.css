@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+  }
+
+  .header-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+}
+
+.header-link{
+    text-decoration: none;
+}
+.petful-header{
+    color: rgb(83, 79, 79);
+    font-size: 50px;
+    margin-top: 25px;
+    text-align: center;
+}
