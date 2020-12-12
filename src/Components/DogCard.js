@@ -8,21 +8,22 @@ export default class DogCard extends Component {
 
   handleAdopt = (event) => {
     event.preventDefault();
-    console.log("clicked");
+    //console.log("clicked");
+    window.alert (
+      "Congrats!! You adopted a dog!"
+    )
     const type = { type: event.target.id };
     ApiCalls.removePet(type)
     .then(() => ApiCalls.getPets())
     .then((pets) => {
       this.context.updatePets(pets)
     })
-    .then(() => ApiCalls.removePerson(this.context.user))
+    .then(() => ApiCalls.removePerson())
     .then(() => ApiCalls.getAllPeople())
     .then((people) => {
       this.context.setPeople(people)
     })
-    window.alert (
-      "Congrats!! You adopted a dog!"
-    )
+    console.log('from dogs', this.context.people)
   };
 
   showAdoptButton = () => {
@@ -39,6 +40,10 @@ export default class DogCard extends Component {
     if (!this.props.dogs) {
       return "Loading";
     }
+    console.log('from dogs', this.context.people)
+
+    // console.log('props', this.props)
+    // console.log('context', this.context)
 
     const dog = this.props.dogs[0];
 

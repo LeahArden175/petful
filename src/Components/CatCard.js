@@ -8,21 +8,23 @@ export default class CatCard extends Component {
 
   handleAdopt = (event) => {
     event.preventDefault();
-    console.log("clicked");
+    //console.log(this.context);
+    window.alert (
+      "Congrats!! You adopted a cat!"
+    )
     const type = { type: event.target.id };
     ApiCalls.removePet(type)
       .then(() => ApiCalls.getPets())
       .then((pets) => {
         this.context.updatePets(pets);
       })
-      .then(() => ApiCalls.removePerson(this.context.user))
+      .then(() => ApiCalls.removePerson())
+      .then(() => this.context.user === undefined)
       .then(() => ApiCalls.getAllPeople())
       .then((people) => {
-        this.context.setPeople(people);
+        this.context.setPeople(people)
       })
-      return (
-        <p>Congrats!! You adopted a dog!</p>
-      )
+      console.log('from cats', this.context.people)
   };
 
   showAdoptButton = () => {
@@ -40,6 +42,8 @@ export default class CatCard extends Component {
       return "Loading";
     }
     const cat = this.props.cats[0];
+
+    console.log('from cats', this.context.people)
 
     return (
       <div>

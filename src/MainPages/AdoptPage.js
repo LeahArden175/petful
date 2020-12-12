@@ -11,7 +11,7 @@ export default class AdoptPage extends Component {
       dog: null,
     },
     people: [],
-    user: null,
+    user: '',
     adopting : true,
   };
 
@@ -26,7 +26,7 @@ export default class AdoptPage extends Component {
           this.setState({
             pets: pets,
             people: people,
-          });
+          })
           console.log(this.state);
         })
         .catch((error) => {
@@ -48,6 +48,12 @@ export default class AdoptPage extends Component {
     });
   };
 
+  addPerson = (person) => {
+    this.setState({
+      people: person
+    })
+  }
+
   setPeople = (people) => {
     this.setState({
       people
@@ -61,8 +67,6 @@ export default class AdoptPage extends Component {
     //   this.fillPeopleQueue()
     // }
 
-    console.log("people", people);
-
     ApiCalls.addPerson({ name: event.target.name.value });
 
     this.setState({
@@ -71,11 +75,11 @@ export default class AdoptPage extends Component {
     });
 
     this.interval = setInterval(() => {
-      if(this.state.people[1] === this.state.user) {
+      if(this.state.people === null || this.state.people[1] === this.state.user) {
         this.fillPeopleQueue();
       }
-      if(this.state.people[0] === this.state.user) {
-        console.log('stop counter')
+      if(this.state.people === null || this.state.people[0] === this.state.user) {
+        //console.log('stop counter')
         return clearInterval(this.interval)
       }
       let pet
@@ -85,7 +89,7 @@ export default class AdoptPage extends Component {
         pet = {type : 'dogs'}
       }
       ApiCalls.removePet(pet)
-      .then(result => ApiCalls.removePerson(this.state.people[0]))
+      .then(result => ApiCalls.removePerson())
       .then(result => ApiCalls.getPets()
         .then((pets) => {
           this.setState({
@@ -119,6 +123,9 @@ export default class AdoptPage extends Component {
         },
         body: JSON.stringify(names[count--]),
       }).then((response) => {
+        if(this.state.people === null) {
+          return this.addPerson(names[count].name)
+        }
         if(count === -1) return
         this.updatePeople(names[count].name)
       });
@@ -133,13 +140,26 @@ export default class AdoptPage extends Component {
         )
       })
     } else {
+      return 'Loading'
+    }
+  }
+
+  renderLineMessage = () => {
+    if(this.state.user === null || this.state.people === null || this.state.user !== this.state.people[0]){
       return (
-      <p>No one in line</p>
+        <p>Join the back of the line to adopt!</p>
       )
+    } else if(this.state.user === this.state.people[0]){
+      return (
+        <p>It's your turn to adopt</p>
+      )
+    } else {
+      return;
     }
   }
 
   render() {
+
     const value = {
       updatePets: this.updatePets,
       updatePeople: this.updatePeople,
@@ -155,7 +175,7 @@ export default class AdoptPage extends Component {
           <PetInfo pets={pets} people={people} />
         </div>
         <div>
-          <p>Join the back of the line to adopt!</p>
+          {this.renderLineMessage()}
           <ul>
 
             {this.renderPeopleQueue()}
