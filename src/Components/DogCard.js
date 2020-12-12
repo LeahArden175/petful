@@ -24,7 +24,7 @@ export default class DogCard extends Component {
   showAdoptButton = () => {
     if (this.context.user && this.context.people && this.context.user === this.context.people[0]) {
       return (
-        <button id="cats" onClick={this.handleAdopt}>
+        <button id="dogs" onClick={this.handleAdopt}>
           Adopt me!
         </button>
       );

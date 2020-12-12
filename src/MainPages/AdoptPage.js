@@ -57,7 +57,6 @@ export default class AdoptPage extends Component {
   joinList = (event) => {
     event.preventDefault();
     let people = this.state.people;
-    // people.push(event.target.name.value);
 
     console.log("people", people);
 
@@ -69,6 +68,7 @@ export default class AdoptPage extends Component {
     });
 
     this.interval = setInterval(() => {
+      console.log('COUNTER')
       if(this.state.people[0] === this.state.user) {
         console.log('stop counter')
         this.fillPeopleQueue();
@@ -81,8 +81,8 @@ export default class AdoptPage extends Component {
         pet = {type : 'dogs'}
       }
       ApiCalls.removePet(pet)
-      .then(ApiCalls.removePerson(this.state.people[0]))
-      .then(ApiCalls.getPets()
+      .then(result => ApiCalls.removePerson(this.state.people[0]))
+      .then(result => ApiCalls.getPets()
         .then((pets) => {
           this.setState({
             adopting : !this.state.adopting
@@ -90,7 +90,7 @@ export default class AdoptPage extends Component {
           this.updatePets(pets)
         })
       )
-      .then(ApiCalls.getAllPeople()
+      .then(result => ApiCalls.getAllPeople()
         .then((people) => {
           this.setState({people})
         })  
