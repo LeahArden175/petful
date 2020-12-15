@@ -11,7 +11,9 @@ export default class AdoptPage extends Component {
       dog: null,
     },
     people: [],
-    user: '',
+    user: {
+      name: '',
+    },
     adopting : true,
   };
 
@@ -71,14 +73,14 @@ export default class AdoptPage extends Component {
 
     this.setState({
       people: [...people, event.target.name.value],
-      user: event.target.name.value,
+      user: {name: event.target.name.value},
     });
 
     this.interval = setInterval(() => {
-      if(this.state.people === null || this.state.people[1] === this.state.user) {
+      if(this.state.people === null || this.state.people[1] === this.state.user.name) {
         this.fillPeopleQueue();
       }
-      if(this.state.people === null || this.state.people[0] === this.state.user) {
+      if(this.state.people === null || this.state.people[0] === this.state.user.name) {
         //console.log('stop counter')
         return clearInterval(this.interval)
       }
@@ -111,7 +113,7 @@ export default class AdoptPage extends Component {
   fillPeopleQueue() {
     let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }]
     console.log(names)
-    let count = 4;
+    let count = 3;
     this.intervalID = setInterval(() => {
       if (count === -1) {
         return clearInterval(this.intervalID)
@@ -123,11 +125,8 @@ export default class AdoptPage extends Component {
         },
         body: JSON.stringify(names[count--]),
       }).then((response) => {
-        if(this.state.people === null) {
-          return this.addPerson(names[count].name)
-        }
-        if(count === -1) return
-        this.updatePeople(names[count].name)
+        ApiCalls.getAllPeople()
+        .then((response) => this.setPeople(response))
       });
     }, 5000);
   };

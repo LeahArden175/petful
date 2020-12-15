@@ -23,11 +23,10 @@ export default class DogCard extends Component {
     .then((people) => {
       this.context.setPeople(people)
     })
-    console.log('from dogs', this.context.people)
   };
 
   showAdoptButton = () => {
-    if (this.context.user && this.context.people && this.context.user === this.context.people[0]) {
+    if (this.context.user.name && this.context.people && this.context.user.name === this.context.people[0]) {
       return (
         <button id="dogs" onClick={this.handleAdopt}>
           Adopt me!
@@ -40,10 +39,6 @@ export default class DogCard extends Component {
     if (!this.props.dogs) {
       return "Loading";
     }
-    console.log('from dogs', this.context.people)
-
-    // console.log('props', this.props)
-    // console.log('context', this.context)
 
     const dog = this.props.dogs[0];
 

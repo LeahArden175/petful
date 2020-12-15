@@ -19,16 +19,14 @@ export default class CatCard extends Component {
         this.context.updatePets(pets);
       })
       .then(() => ApiCalls.removePerson())
-      .then(() => this.context.user === undefined)
       .then(() => ApiCalls.getAllPeople())
       .then((people) => {
         this.context.setPeople(people)
       })
-      console.log('from cats', this.context.people)
   };
 
   showAdoptButton = () => {
-    if (this.context.user && this.context.people && this.context.user === this.context.people[0]) {
+    if (this.context.user.name && this.context.people && this.context.user.name === this.context.people[0]) {
       return (
         <button id="cats" onClick={this.handleAdopt}>
           Adopt me!
@@ -42,8 +40,6 @@ export default class CatCard extends Component {
       return "Loading";
     }
     const cat = this.props.cats[0];
-
-    console.log('from cats', this.context.people)
 
     return (
       <div>
