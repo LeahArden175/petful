@@ -1,72 +1,68 @@
-.pet-card{
+.pet-card {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.pet-img {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+}
+
+.pet-info-div {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 20px;
+  width: 70%;
+}
+
+.adoptButton {
+  margin-bottom: 10px;
+}
+
+.pet-info-p {
+  margin: 5px;
+  text-align: left;
+}
+
+.pet-name {
+  text-decoration: underline;
+}
+
+@media all and (min-width: 800px) {
+  .pet-card {
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-bottom: 20px;
-}
+  }
 
-.pet-img{
-    /* width : 80%;
-    height: 80%;
-    margin: auto; */
+  .pet-img {
     float: left;
-    width:  100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
-}
-
-.pet-info-div{
+  }
+  .pet-info-div {
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 20px;
-}
+  }
 
-.adoptButton{
+  .adoptButton {
     margin-bottom: 10px;
-}
+  }
 
-.pet-info-p{
+  .pet-info-p {
     margin: 5px;
     text-align: left;
-}
+  }
 
-.pet-name{
+  .pet-name {
     text-decoration: underline;
-}
-
-@media all and (min-width: 800px){
-    .pet-card{
-        display: flex;
-        flex-direction: column;
-        margin: auto;
-        margin-bottom: 20px;
-    }
-    
-    .pet-img{
-        float: left;
-    width:  200px;
-    height: 200px;
-    object-fit: cover;
-    }
-    
-    .pet-info-div{
-        display: flex;
-        flex-direction: column;
-        margin: auto;
-        margin-top: 20px;
-    }
-    
-    .adoptButton{
-        margin-bottom: 10px;
-    }
-    
-    .pet-info-p{
-        margin: 5px;
-        text-align: left;
-    }
-    
-    .pet-name{
-        text-decoration: underline;
-    }
+  }
 }

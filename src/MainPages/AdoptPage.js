@@ -78,7 +78,7 @@ export default class AdoptPage extends Component {
     });
 
     this.interval = setInterval(() => {
-      if(this.state.people === null || this.state.people[2] === this.state.user.name) {
+      if(this.state.people[2] === this.state.user.name) {
         this.fillPeopleQueue();
       }
       if(this.state.people === null || this.state.people[0] === this.state.user.name) {
