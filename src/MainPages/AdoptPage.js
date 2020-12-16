@@ -3,6 +3,7 @@ import ApiCalls from "../ApiCalls";
 import config from "../config";
 import PetInfo from "../Components/PetInfo";
 import Context from "../Context";
+import './AdoptPage.css'
 
 export default class AdoptPage extends Component {
   state = {
@@ -77,7 +78,7 @@ export default class AdoptPage extends Component {
     });
 
     this.interval = setInterval(() => {
-      if(this.state.people === null || this.state.people[1] === this.state.user.name) {
+      if(this.state.people === null || this.state.people[2] === this.state.user.name) {
         this.fillPeopleQueue();
       }
       if(this.state.people === null || this.state.people[0] === this.state.user.name) {
@@ -111,7 +112,7 @@ export default class AdoptPage extends Component {
   };
 
   fillPeopleQueue() {
-    let names = [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }]
+    let names = [{ name: 'John Hoppe' }, { name: 'Margo Mullen' }, { name: 'Clarence Dot' }, { name: 'Heather McKenna' }]
     console.log(names)
     let count = 3;
     this.intervalID = setInterval(() => {
@@ -135,22 +136,22 @@ export default class AdoptPage extends Component {
     if(this.state.people){
       return this.state.people.map((person, index) => {
         return (
-        <li key={index}>{person}</li>
+        <li key={index} className='people-list-item'>{person}</li>
         )
       })
     } else {
-      return 'Loading'
+      return 'No one is in line'
     }
   }
 
   renderLineMessage = () => {
-    if(this.state.user === null || this.state.people === null || this.state.user !== this.state.people[0]){
+    if(this.state.user.name === null || this.state.people === null || this.state.user.name !== this.state.people[0]){
       return (
-        <p>Join the back of the line to adopt!</p>
+        <p className='line-message'>Join the back of the line to adopt!</p>
       )
-    } else if(this.state.user === this.state.people[0]){
+    } else if(this.state.user.name === this.state.people[0]){
       return (
-        <p>It's your turn to adopt</p>
+        <p className='line-message-turn'>It's your turn to adopt!</p>
       )
     } else {
       return;
@@ -173,9 +174,10 @@ export default class AdoptPage extends Component {
         <div>
           <PetInfo pets={pets} people={people} />
         </div>
-        <div>
+        <hr className='line'/>
+        <div className='list-div'>
           {this.renderLineMessage()}
-          <ul>
+          <ul className='people-list'>
 
             {this.renderPeopleQueue()}
           </ul>

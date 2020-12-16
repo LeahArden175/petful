@@ -1,0 +1,87 @@
+.list-div{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: left;
+    margin: auto;
+    width: 70%;
+}
+
+.line{
+    width: 75%;
+    color: black;
+    height: 3px;
+    background-color: black;
+}
+
+.people-list{
+    text-decoration: none;
+    list-style: inside;
+}
+
+.people-list-item{
+    list-style-type: square;
+}
+
+.line-message {
+    font-size: 20px;
+    text-align: center;
+}
+
+.line-message-turn{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(73, 7, 135);
+}
+
+
+@media all and (min-width: 800px) {
+    .list-div{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        text-align: left;
+        margin: auto;
+        width: 50%;
+    }
+
+    .line{
+        width: 75%;
+        color: black;
+        height: 3px;
+        background-color: black;
+    }
+    
+    .people-list{
+        text-decoration: none;
+        list-style: inside;
+        margin: auto;
+    }
+    
+    .people-list-item{
+        list-style-type: square;
+        margin: 5px;
+    }
+    
+    .line-message {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .line-message-turn{
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        color: rgb(73, 7, 135);
+    }
+
+    form {
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    button {
+        margin-left: 10px;
+    }
+}

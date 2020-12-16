@@ -28,7 +28,7 @@ export default class DogCard extends Component {
   showAdoptButton = () => {
     if (this.context.user.name && this.context.people && this.context.user.name === this.context.people[0]) {
       return (
-        <button id="dogs" onClick={this.handleAdopt}>
+        <button className='adoptButton' id="dogs" onClick={this.handleAdopt}>
           Adopt me!
         </button>
       );
@@ -45,12 +45,15 @@ export default class DogCard extends Component {
     return (
       <div>
         <div className='pet-card'>
-          <h2>DogCard</h2>
+          <h2 className="pet-name">{dog.name}</h2>
           <img className='pet-img'src={dog.imageURL} alt="dog" />
-          <p>Name: {dog.name}</p>
-          <p>Breed: {dog.breed}</p>
-          <p>Age: {dog.age}</p>
-          <p>Story: {dog.story}</p>
+          <div className='pet-info-div'>
+          <p className='pet-info-p'>Breed: {dog.breed}</p>
+          <p className='pet-info-p'>Age: {dog.age}</p>
+          <p className='pet-info-p'>Gender: {dog.gender}</p>
+          <p className='pet-info-p'>Story: {dog.story}</p>
+          <p className='pet-info-p'>Description: {dog.description}</p>
+          </div>
         </div>
         {this.showAdoptButton()}
       </div>
