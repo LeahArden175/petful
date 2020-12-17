@@ -8,27 +8,23 @@ You can find the live app here: https://petful-client-template-three.vercel.app/
 
 <br/>
 
-![picture](screenshots/landingpage.jpeg)
-![picture](screenshots/adoption1.jpeg)
-![picture](screenshots/adoption2.jpeg)
-
 Screenshots:
 
 <br/>
 
 ![picture](screenshots/landingpage.jpeg)
-![picture](screenshots/adoption1.jpeg)
-![picture](screenshots/adoption2.jpeg)
+<!-- ![picture](screenshots/adoption1.jpeg)
+![picture](screenshots/adoption2.jpeg) -->
 
 <br/>
 
-![picture](screenshots/inline.jpeg)
+<!-- ![picture](screenshots/inline.jpeg)
 ![picture](screenshots/timetoadopt.jpeg)
-![picture](screenshots/adoptmessage.jpeg)
+![picture](screenshots/adoptmessage.jpeg) -->
 
 <br/>
 
-![picture](screenshots/afteradoption.jpeg)
+<!-- ![picture](screenshots/afteradoption.jpeg) -->
 
 Technology:
 
