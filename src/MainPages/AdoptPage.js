@@ -145,7 +145,7 @@ export default class AdoptPage extends Component {
   }
 
   renderLineMessage = () => {
-    if(this.state.user.name === null || this.state.people === null || this.state.user.name !== this.state.people[0]){
+    if(!this.state.user.name || this.state.people === null){
       return (
         <p className='line-message'>Join the back of the line to adopt!</p>
       )
@@ -154,7 +154,29 @@ export default class AdoptPage extends Component {
         <p className='line-message-turn'>It's your turn to adopt!</p>
       )
     } else {
-      return;
+      return(
+        <p className='line-message' >You're in line!</p>
+      )
+    }
+  }
+
+  renderInput = () => {
+    if(!this.state.user.name) {
+      return (
+        <form onSubmit={this.joinList}>
+            <input
+              id="name"
+              placeholder="Jane Doe"
+              required
+              type="text"
+            ></input>
+            <button>Join Line!</button>
+          </form>
+      )
+    } else {
+      if(this.state.user.name) {
+        return;
+      }
     }
   }
 
@@ -181,15 +203,7 @@ export default class AdoptPage extends Component {
 
             {this.renderPeopleQueue()}
           </ul>
-          <form onSubmit={this.joinList}>
-            <input
-              id="name"
-              placeholder="Jane Doe"
-              required
-              type="text"
-            ></input>
-            <button>Join Line!</button>
-          </form>
+          {this.renderInput()}
         </div>
       </Context.Provider>
     );

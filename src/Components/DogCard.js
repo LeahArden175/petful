@@ -14,6 +14,7 @@ export default class DogCard extends Component {
     )
     const type = { type: event.target.id };
     ApiCalls.removePet(type)
+    .then(() => this.context.user.name = null)
     .then(() => ApiCalls.getPets())
     .then((pets) => {
       this.context.updatePets(pets)
@@ -37,7 +38,7 @@ export default class DogCard extends Component {
 
   render() {
     if (!this.props.dogs) {
-      return "Loading";
+      return "Loading dogs...";
     }
 
     const dog = this.props.dogs[0];
@@ -46,7 +47,9 @@ export default class DogCard extends Component {
       <div>
         <div className='pet-card'>
           <h2 className="pet-name">{dog.name}</h2>
+          <div className='img-div'>
           <img className='pet-img'src={dog.imageURL} alt="dog" />
+          </div>
           <div className='pet-info-div'>
           <p className='pet-info-p'>Breed: {dog.breed}</p>
           <p className='pet-info-p'>Age: {dog.age}</p>

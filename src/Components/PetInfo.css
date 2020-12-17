@@ -11,10 +11,10 @@
   .pet-card-div {
     display: flex;
     flex-direction: row;
-    align-content: center;
-    justify-items: center;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     margin: auto;
-    width: 50%;
+    width: 100%;
   }
 }

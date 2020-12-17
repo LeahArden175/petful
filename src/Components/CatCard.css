@@ -40,12 +40,19 @@
     margin-bottom: 20px;
   }
 
-  .pet-img {
-    float: left;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+  .img-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+  .pet-img {
+    width: 300px;
+    height: 300px;
+    margin: 30px;
+  }
+
+
   .pet-info-div {
     display: flex;
     flex-direction: column;
